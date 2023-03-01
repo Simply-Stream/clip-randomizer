@@ -90,8 +90,16 @@ export class TwitchClipsRandomizer {
             }
         }
 
+        let srcAttribute: string = clip.thumbnailUrl;
+
+        if (this.quality && srcAttribute.indexOf('AT-cm%7C') === -1) {
+            const lastSegment = srcAttribute.split('/').at(-1);
+            srcAttribute = srcAttribute.replace(lastSegment, 'AT-cm%7C' + lastSegment);
+        }
+        srcAttribute = srcAttribute.replace('-preview-480x272.jpg', `${this.quality ? '-' + this.quality : ''}.mp4`);
+
         this.videoSource.poster = clip.thumbnailUrl;
-        this.videoSource.setAttribute('src', clip.thumbnailUrl.replace('-preview-480x272.jpg', `${this.quality ? '-' + this.quality : ''}.mp4`));
+        this.videoSource.setAttribute('src', srcAttribute);
         this.videoSource.load();
     }
 }
