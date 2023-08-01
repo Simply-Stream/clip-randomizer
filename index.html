@@ -1,51 +1,35 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <meta charset="utf-8"/>
-        <title>Webpack App</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Simply-Stream Clip-Randomizer (Offline)</title>
 
-        <!-- Here you can override the default styles -->
-        <style>
-            #backdrop {
+        <script id="config-data" type="application/json">
+            {
+                "streamers": [],
+                "authentication": {
+                    "clientId": "",
+                    "clientSecret": ""
+                },
+                "allowedClipCreators": "",
+                "deniedClipCreators": "",
+                "allowedGame": "",
+                "deniedGame": "",
+                "hideInfo": false,
+                "information": {
+                    "streamer": true,
+                    "game": true,
+                    "clip": true
+                },
+                "startedAt": 0,
+                "endedAt": 0,
+                "quality": ""
             }
-
-            #clipInfo {
-            }
-
-            #loadingSpinner {
-            }
-        </style>
+        </script>
     </head>
     <body>
-        <script>
-            window.onload = async function () {
-                const clipsRandomizer = new SimplyStream.TwitchClipsRandomizer({
-                    clientId: '{{CLIENT_ID}}',
-                    clientSecret: '{{CLIENT_SECRET}}',
-                    streamers: ['{{STREAMER_1}}', '{{STREAMER_2}}'],
-                    quality: null, // 360, 480, 720, entfernen für 1080
-                    displayConfiguration: {
-                        hideAll: false,
-                        gameName: true,
-                        clipTitle: true,
-                        streamerName: true
-                    }
-                });
-
-                clipsRandomizer.start();
-            };
-        </script>
-
-        <div id="backdrop">
-            <div id="streamerName"></div>
-            <div id="clipInfo"><span id="game"></span><span id="clip"></span></div>
-        </div>
-
-        <div id="loadingSpinner" class="spinner-border text-light" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-
-        <video id="twitchClip" src="" height="100%" width="100%" type="video/mp4"></video>
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
     </body>
-
 </html>

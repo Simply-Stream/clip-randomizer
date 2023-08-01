@@ -9,7 +9,7 @@ npm run build
 or
 
 ```
-yarn build:prod
+yarn build
 ```
 
 to bundle your application
@@ -41,26 +41,89 @@ created application.
 
 ## Configuration in index.html
 
-For simplicity, we already added all you need in index.html. 
+For simplicity, we already added all you need in index.html.
 
 Open it with an editor of your liking and change the values below.
-Everything including the {{ and }} need to be replaces. For example, a list of streamers should look like `['aaricdev', 'someone_else']`,
-**NOT** like this `['{{aaricdev}}']`. 
+The only required values here are the following:
 
-```javascript
-const clipsRandomizer = new SimplyStream.TwitchClipsRandomizer({
-    clientId: '{{CLIENT_ID}}', // This is the client id you copied the step before 
-    clientSecret: '{{CLIENT_SECRET}}', // This is the client secret you copiet the step before
-    streamers: ['{{STREAMER_1}}', '{{STREAMER_2}}'], // Just add all the streamers (max. 100) you want to show of, or just yourself
-    quality: null, // 360, 480, 720, null for 1080
-    displayConfiguration: {
-        hideAll: false, // Completely hides the dark backdrop on top
-        gameName: true, // Show/Hide the games game 
-        clipTitle: true, // Show/Hide the clip title
-        streamerName: true // Show/Hide the streamers name
+- streamers
+- authentication
+- hideInfo
+- If hideInfo is false, information is mandatory
+
+You can delete everything else. Please note, that this must be a valid JSON format. In case you need help figuring out how this should look like, you can search for "JSON validator" on your favorite search engine.
+
+Full Configuration example:
+```html
+
+<script id="config-data" type="application/json">
+    {
+        "streamers": ["streamer1", "streamer2", "etc..."],
+        "authentication": {
+            "clientId": "",
+            "clientSecret": ""
+        },
+        "allowedClipCreators": "",
+        "deniedClipCreators": "",
+        "allowedGame": "",
+        "deniedGame": "",
+        "hideInfo": false,
+        "information": {
+            "streamer": true,
+            "game": true,
+            "clip": true
+        },
+        "startedAt": 0,
+        "endedAt": 0,
+        "quality": ""
     }
-});
+</script>
 ```
 
-You're done. Put it as local browsersource into your OBS scene and don't forget to check the "Disable, when source is
+Reduced Configuration:
+
+```html
+
+<script id="config-data" type="application/json">
+    {
+        "streamers": ["streamer1", "streamer2", "etc..."],
+        "authentication": {
+            "clientId": "",
+            "clientSecret": ""
+        },
+        "hideInfo": false,
+        "information": {
+            "streamer": true,
+            "game": true,
+            "clip": true
+        }
+    }
+</script>
+```
+
+Using an access token:
+
+
+```html
+
+<script id="config-data" type="application/json">
+    {
+        "streamers": ["streamer1", "streamer2", "etc..."],
+        "authentication": {
+            "clientId": "YOUR_CLIENT_ID",
+            "accessToken": "oauth:YOUR_TOKEN"
+        },
+        "hideInfo": false,
+        "information": {
+            "streamer": true,
+            "game": true,
+            "clip": true
+        }
+    }
+</script>
+```
+
+You're done. Put it as local BrowserSource into your OBS scene and don't forget to check the "Disable, when source is
 not visible" checkbox!
+
+In case you need help configuring this, don't hesitate to ask me on Discord, Twitter (I'll never call it by its shitty new name) or GitHub!
