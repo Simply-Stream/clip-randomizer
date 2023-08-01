@@ -43,40 +43,70 @@ created application.
 
 For simplicity, we already added all you need in index.html.
 
+| Name                 | Description                                                                                                                                                                                                                                                         | Mandatory                   |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| standalone           | Controls whether to communicate directly with Twitch.tv or through Simply-Stream.                                                                                                                                                                                   | No                          |
+| streamers            | A list of streamers that the randomizer should show.                                                                                                                                                                                                                | Yes                         |
+| authentication       | A `clientId` and `clientSecret` or `accessToken`. Required to communicate with Twitch.tv.                                                                                                                                                                           | Yes, when standalone = true |
+| allowedClipCreators  | A list of users. Only clips from these users will be shown.                                                                                                                                                                                                         | No                          |
+| deniedClipCreators   | The opposite of `allowedClipCreators`. Clips by these users will not be shown.                                                                                                                                                                                      | No                          |
+| allowedGame          | A list of game ids of games to show in clip rotation. You can use the [Simply-Stream randomizer url generator](https://simply-stream.com/tools/random-clips/) to find out which ID you can place here.                                                              | No                          |
+| deniedGame           | A list of game ids of games to ignore in clip rotation. You can use the [Simply-Stream randomizer url generator](https://simply-stream.com/tools/random-clips/) to find out which ID you can place here.                                                            | No                          |
+| hideInfo             | This will control whether to show or hide the clip information completely.                                                                                                                                                                                          | No                          |
+| information.streamer | Show the streamers display name. Requires `hideInfo` to be `false`.                                                                                                                                                                                                 | No                          |
+| information.game     | Show the games name. Requires `hideInfo` to be `false`.                                                                                                                                                                                                             | No                          |
+| information.clip     | Show the clips name. Requires `hideInfo` to be `false`.                                                                                                                                                                                                             | No                          |
+| startedAt            | A time span in months. Defines how old a clip can be. For example, setting this to 2 will only show clips that are younger than 2 months + 1 week (1 week is default, if `endedAt` is not set)                                                                      | No                          |
+| endedAt              | This is the other part of the `startedAt` time span and only works when setting `startedAt`. Setting `startedAt` to 6 and `endedAt` to 4 will only show clips that are 6 to 4 months old. Newer will be ignored. `endedAt` has to be lower than `startedAt` to work | No                          |
+| quality              | One of the following values: 160, 360, 480, 720 or 1080. 1080 is default, when quality equals `null`, an empty string `""` or not existend                                                                                                                          | No                          |
+
 Open it with an editor of your liking and change the values below.
-The only required values here are the following:
-
-- streamers
-- authentication
-- hideInfo
-- If hideInfo is false, information is mandatory
-
-You can delete everything else. Please note, that this must be a valid JSON format. In case you need help figuring out how this should look like, you can search for "JSON validator" on your favorite search engine.
 
 Full Configuration example:
+
 ```html
 
 <script id="config-data" type="application/json">
-    {
-        "streamers": ["streamer1", "streamer2", "etc..."],
-        "authentication": {
-            "clientId": "",
-            "clientSecret": ""
-        },
-        "allowedClipCreators": "",
-        "deniedClipCreators": "",
-        "allowedGame": "",
-        "deniedGame": "",
-        "hideInfo": false,
-        "information": {
-            "streamer": true,
-            "game": true,
-            "clip": true
-        },
-        "startedAt": 0,
-        "endedAt": 0,
-        "quality": ""
-    }
+            {
+                "standalone": true,
+                "streamers": ["streamer1", "streamer2", "etc"],
+                "authentication": {
+                    "clientId": "YOUR_CLIENT_ID",
+                    "clientSecret": "YOUR_CLIENT_SECRET"
+                },
+                "allowedClipCreators": null,
+                "deniedClipCreators": null,
+                "allowedGame": null,
+                "deniedGame": null,
+                "hideInfo": false,
+                "information": {
+                    "streamer": true,
+                    "game": true,
+                    "clip": true
+                },
+                "startedAt": null,
+                "endedAt": null,
+                "quality": null
+            }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 ```
 
@@ -98,11 +128,29 @@ Reduced Configuration:
             "clip": true
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 ```
 
 Using an access token:
-
 
 ```html
 
@@ -120,10 +168,30 @@ Using an access token:
             "clip": true
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 ```
 
 You're done. Put it as local BrowserSource into your OBS scene and don't forget to check the "Disable, when source is
 not visible" checkbox!
 
-In case you need help configuring this, don't hesitate to ask me on Discord, Twitter (I'll never call it by its shitty new name) or GitHub!
+In case you need help configuring this, don't hesitate to ask me on Discord, Twitter (I'll never call it by its shitty
+new name) or GitHub!
