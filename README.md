@@ -64,130 +64,74 @@ Open it with an editor of your liking and change the values below.
 
 Full Configuration example:
 
-```html
-
-<script id="config-data" type="application/json">
-            {
-                "standalone": true,
-                "streamers": ["streamer1", "streamer2", "etc"],
-                "authentication": {
-                    "clientId": "YOUR_CLIENT_ID",
-                    "clientSecret": "YOUR_CLIENT_SECRET"
-                },
-                "allowedClipCreators": null,
-                "deniedClipCreators": null,
-                "allowedGame": null,
-                "deniedGame": null,
-                "hideInfo": false,
-                "information": {
-                    "streamer": true,
-                    "game": true,
-                    "clip": true
-                },
-                "startedAt": null,
-                "endedAt": null,
-                "quality": null
-            }
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
+```json
+{
+    "standalone": true,
+    "streamers": [
+        "streamer1",
+        "streamer2",
+        "etc"
+    ],
+    "authentication": {
+        "clientId": "YOUR_CLIENT_ID",
+        "clientSecret": "YOUR_CLIENT_SECRET"
+    },
+    "allowedClipCreators": null,
+    "deniedClipCreators": null,
+    "allowedGame": null,
+    "deniedGame": null,
+    "hideInfo": false,
+    "information": {
+        "streamer": true,
+        "game": true,
+        "clip": true
+    },
+    "startedAt": null,
+    "endedAt": null,
+    "quality": null
+}
 ```
 
 Reduced Configuration:
 
-```html
-
-<script id="config-data" type="application/json">
-    {
-        "streamers": ["streamer1", "streamer2", "etc..."],
-        "authentication": {
-            "clientId": "",
-            "clientSecret": ""
-        },
-        "hideInfo": false,
-        "information": {
-            "streamer": true,
-            "game": true,
-            "clip": true
-        }
+```json
+{
+    "standalone": true,
+    "streamers": [
+        "streamer1",
+        "streamer2",
+        "etc..."
+    ],
+    "authentication": {
+        "clientId": "",
+        "clientSecret": ""
+    },
+    "hideInfo": false,
+    "information": {
+        "streamer": true,
+        "game": true,
+        "clip": true
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
+}
 ```
 
 Using an access token:
 
-```html
-
-<script id="config-data" type="application/json">
-    {
-        "streamers": ["streamer1", "streamer2", "etc..."],
-        "authentication": {
-            "clientId": "YOUR_CLIENT_ID",
-            "accessToken": "oauth:YOUR_TOKEN"
-        },
-        "hideInfo": false,
-        "information": {
-            "streamer": true,
-            "game": true,
-            "clip": true
-        }
+```json
+{
+    "standalone": true,
+    "streamers": ["streamer1", "streamer2", "etc..."],
+    "authentication": {
+        "clientId": "YOUR_CLIENT_ID",
+        "accessToken": "oauth:YOUR_TOKEN"
+    },
+    "hideInfo": false,
+    "information": {
+        "streamer": true,
+        "game": true,
+        "clip": true
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
+}
 ```
 
 You're done. Put it as local BrowserSource into your OBS scene and don't forget to check the "Disable, when source is
