@@ -59,6 +59,7 @@ For simplicity, we already added all you need in index.html.
 | startedAt            | A time span in months. Defines how old a clip can be. For example, setting this to 2 will only show clips that are younger than 2 months + 1 week (1 week is default, if `endedAt` is not set)                                                                      | No                          |
 | endedAt              | This is the other part of the `startedAt` time span and only works when setting `startedAt`. Setting `startedAt` to 6 and `endedAt` to 4 will only show clips that are 6 to 4 months old. Newer will be ignored. `endedAt` has to be lower than `startedAt` to work | No                          |
 | quality              | One of the following values: 160, 360, 480, 720 or 1080. 1080 is default, when quality equals `null`, an empty string `""` or not existend                                                                                                                          | No                          |
+| skipClipOnError      | When an error occurs while loading a clip, this defines whether the randomizer will skip the clip or load a higher quality if possible. Default: `false`                                                                                                            | No                          |
 
 Open it with an editor of your liking and change the values below.
 
@@ -88,7 +89,8 @@ Full Configuration example:
     },
     "startedAt": null,
     "endedAt": null,
-    "quality": null
+    "quality": null,
+    "skipClipOnError": null
 }
 ```
 
@@ -120,7 +122,11 @@ Using an access token:
 ```json
 {
     "standalone": true,
-    "streamers": ["streamer1", "streamer2", "etc..."],
+    "streamers": [
+        "streamer1",
+        "streamer2",
+        "etc..."
+    ],
     "authentication": {
         "clientId": "YOUR_CLIENT_ID",
         "accessToken": "oauth:YOUR_TOKEN"
